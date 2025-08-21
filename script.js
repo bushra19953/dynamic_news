@@ -1,19 +1,14 @@
-// 🔑 Your GNews API key
 const API_KEY = "4369311ede5b64e351ecca964a9c42ce";
 const url = `https://gnews.io/api/v4/top-headlines?token=${API_KEY}&lang=en&country=pk&q=`;
 
-// Load default news on page load
 window.addEventListener("load", () => fetchNews("Pakistan"));
 
-// Reload function
 function reload() {
   window.location.reload();
 }
 
-// Fetch news from GNews API
 async function fetchNews(query) {
   try {
-    // ✅ No &apiKey needed, only token
     const res = await fetch(`${url}${query}`);
     const data = await res.json();
     bindData(data.articles);
@@ -24,7 +19,6 @@ async function fetchNews(query) {
   }
 }
 
-// Bind data to template
 function bindData(articles) {
   const cardsContainer = document.getElementById("cards-container");
   const newsCardTemplate = document.getElementById("template-news-card");
@@ -32,22 +26,20 @@ function bindData(articles) {
   cardsContainer.innerHTML = "";
 
   articles.forEach((article) => {
-    if (!article.image) return; // ✅ Use article.image for GNews
-
+    if (!article.image) return;
     const cardClone = newsCardTemplate.content.cloneNode(true);
     fillDataInCard(cardClone, article);
     cardsContainer.appendChild(cardClone);
   });
 }
 
-// Fill template with article data
 function fillDataInCard(cardClone, article) {
   const newsImg = cardClone.querySelector("#news-img");
   const newsTitle = cardClone.querySelector("#news-title");
   const newsSource = cardClone.querySelector("#news-source");
   const newsDesc = cardClone.querySelector("#news-desc");
 
-  newsImg.src = article.image; // ✅ GNews uses "image"
+  newsImg.src = article.image;
   newsTitle.innerHTML = article.title;
   newsDesc.innerHTML = article.description || "No description available.";
 
@@ -57,13 +49,11 @@ function fillDataInCard(cardClone, article) {
 
   newsSource.innerHTML = `${article.source.name} · ${date}`;
 
-  // Click opens full article
   cardClone.firstElementChild.addEventListener("click", () => {
     window.open(article.url, "_blank");
   });
 }
 
-// Navigation (category buttons)
 let curSelectedNav = null;
 
 function onNavItemClick(id) {
@@ -74,7 +64,6 @@ function onNavItemClick(id) {
   curSelectedNav.classList.add("active");
 }
 
-// Search functionality
 const searchButton = document.getElementById("search-button");
 const searchText = document.getElementById("search-text");
 
