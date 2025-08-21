@@ -1,7 +1,7 @@
 const API_KEY = "4369311ede5b64e351ecca964a9c42ce";
 const url = `https://gnews.io/api/v4/top-headlines?token=${API_KEY}&lang=en&country=pk&q=`;
 
-window.addEventListener("load", () => fetchNews("Pakistan"));
+// Removed the original load event listener since it's now handled in the theme loading function
 
 function reload() {
   window.location.reload();
@@ -73,4 +73,41 @@ searchButton.addEventListener("click", () => {
   fetchNews(query);
   curSelectedNav?.classList.remove("active");
   curSelectedNav = null;
+});
+
+// Theme Toggle Functionality
+function toggleTheme() {
+  const body = document.body;
+  const themeIcon = document.querySelector('.theme-icon');
+  const themeText = document.querySelector('.theme-text');
+  
+  if (body.getAttribute('data-theme') === 'light') {
+    // Switch to dark theme
+    body.removeAttribute('data-theme');
+    themeIcon.textContent = '🌙';
+    themeText.textContent = 'Dark';
+    localStorage.setItem('theme', 'dark');
+  } else {
+    // Switch to light theme
+    body.setAttribute('data-theme', 'light');
+    themeIcon.textContent = '☀️';
+    themeText.textContent = 'Light';
+    localStorage.setItem('theme', 'light');
+  }
+}
+
+// Load saved theme on page load
+window.addEventListener('load', () => {
+  const savedTheme = localStorage.getItem('theme');
+  const themeIcon = document.querySelector('.theme-icon');
+  const themeText = document.querySelector('.theme-text');
+  
+  if (savedTheme === 'light') {
+    document.body.setAttribute('data-theme', 'light');
+    themeIcon.textContent = '☀️';
+    themeText.textContent = 'Light';
+  }
+  
+  // Load news after theme is set
+  fetchNews("Pakistan");
 });
