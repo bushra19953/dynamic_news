@@ -108,6 +108,6 @@ window.addEventListener('load', () => {
     themeText.textContent = 'Light';
   }
   
-  // Load news after theme is set
+ 
   fetchNews("Pakistan");
 });
