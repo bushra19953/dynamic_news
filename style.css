@@ -536,7 +536,7 @@ html {
   animation: none;
 }
 
-/* Focus styles for accessibility */
+
 button:focus,
 input:focus,
 nav li:focus {
