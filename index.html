@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dynamic News Website</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1 onclick="reload()">📰 My News Website</h1>
+
+    <!-- Search bar -->
+    <div class="search-bar">
+      <input type="text" id="search-text" placeholder="Search news..."/>
+      <button id="search-button">Search</button>
+    </div>
+  </header>
+
+  <!-- Navigation (categories) -->
+  <nav>
+    <ul>
+      <li id="business" onclick="onNavItemClick('business')">Business</li>
+      <li id="sports" onclick="onNavItemClick('sports')">Sports</li>
+      <li id="technology" onclick="onNavItemClick('technology')">Technology</li>
+      <li id="entertainment" onclick="onNavItemClick('entertainment')">Entertainment</li>
+      <li id="health" onclick="onNavItemClick('health')">Health</li>
+      <li id="science" onclick="onNavItemClick('science')">Science</li>
+    </ul>
+  </nav>
+
+  <!-- News Cards Container -->
+  <main>
+    <div id="cards-container" class="cards-container"></div>
+  </main>
+
+  <!-- Template for a news card -->
+  <template id="template-news-card">
+    <div class="card">
+      <img id="news-img" alt="News Image" />
+      <h2 id="news-title">Title</h2>
+      <p id="news-desc">Description</p>
+      <span id="news-source">Source · Date</span>
+    </div>
+  </template>
+
+  <footer>
+    <p>Powered by NewsAPI</p>
+  </footer>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>
